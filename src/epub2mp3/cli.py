@@ -33,13 +33,11 @@ def check_dependencies(use_ollama: bool = False, verbose: bool = False) -> bool:
     if not check_command_exists("ffmpeg"):
         missing.append("ffmpeg")
     
-    # Piper is installed via pip, check for it
-    try:
-        import piper
-        if verbose:
-            print("✓ Piper TTS found")
-    except ImportError:
+    # Piper is installed as a CLI tool, check for it
+    if not check_command_exists("piper"):
         missing.append("piper-tts (pip install piper-tts)")
+    elif verbose:
+        print("✓ Piper TTS found")
     
     # Optional dependency
     if use_ollama and not check_command_exists("ollama"):
