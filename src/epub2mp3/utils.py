@@ -17,8 +17,8 @@ def sanitize_filename(name: str, max_length: int = 100) -> str:
     Returns:
         A filesystem-safe string
     """
-    # Remove or replace unsafe characters
-    safe = re.sub(r'[<>:"/\\|?*]', '', name)
+    # Remove or replace unsafe characters (including exclamation and apostrophe)
+    safe = re.sub(r'[<>:"/\\|?*!\'`]', '', name)
     # Replace multiple spaces with single space
     safe = re.sub(r'\s+', ' ', safe)
     # Strip leading/trailing spaces
